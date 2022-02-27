@@ -6,19 +6,14 @@ function User({ user, onRemove, onToggle }) {
 
     // Using useEffect to Mount and Unmout
     useEffect(() => {
-        //Mount
-        console.log('component on screen');
-        // props -> state
-        // REST API
-        // libraries D3 Video.js
-        // setInterval, setTimeout
+        console.log('after');
+        console.log(user);
         return () => {
-            //Unmount
-            // clear clearInterval, clearTimeout
-            // get rid of library instance
-            console.log('component dissappeared');
+            console.log('before');
+            console.log(user);
         }
-    }, []);
+    }, [user]);
+
     return (
         <div>
             <b style={{
