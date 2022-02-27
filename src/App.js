@@ -23,17 +23,20 @@ function App() {
     { 
         id:1,
         username: 'tomato',
-        email: 'tomato@tomatoe.com'
+        email: 'tomato@tomatoe.com',
+        active: true,
     },
     { 
         id:2,
         username: 'potata',
-        email: 'potatata@pottat.com'
+        email: 'potatata@pottat.com',
+        active: false,
     },
     { 
         id:3,
         username: '3333',
-        email: '3fdsafdsa3@tomatoe.com'
+        email: '3fdsafdsa3@tomatoe.com',
+        active: false,
     },          
   ]);
   
@@ -60,6 +63,14 @@ function App() {
     setUsers(users.filter(user => user.id !== id));
   };
 
+  const onToggle = id => {
+    setUsers(users.map(
+      user => user.id === id 
+      ? { ...user, active: !user.active } : user
+    ));
+  };
+
+  
   return (
   <>
     <CreateUser
@@ -68,7 +79,7 @@ function App() {
       onChange={onChange}
       onCreate={onCreate}
     />
-    <UserList users={users} onRemove={onRemove} />
+    <UserList users={users} onRemove={onRemove} onToggle={onToggle}/>
   </>
   )
 };
