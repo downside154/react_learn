@@ -54,8 +54,7 @@ function App() {
       username:'',
       email:'',
     })
-
-    console.log(nextId.current); //4
+    
     nextId.current +=1;
   };
 
@@ -70,7 +69,7 @@ function App() {
     ));
   };
 
-  
+
   return (
   <>
     <CreateUser
