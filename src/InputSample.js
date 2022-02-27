@@ -12,16 +12,25 @@ function InputSample(){
     const onChange = (e) => {
         const { name, value } = e.target;
     
-        setInputs({
-            ...inputs,
-            [name]: value,
-        });  
+        // setInputs({
+        //     ...inputs,
+        //     [name]: value,
+        // });
+
+        // these codes do not respect immutability
+        // React will not detect changes in the object and will thus not render  
+        inputs[name] = value;
+        setInputs(inputs);
+
+        
     };
     const onReset = () => {
         setInputs({
             name: '',
             nickname:'',
+
         });
+
     };
 
     return(
