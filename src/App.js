@@ -1,6 +1,7 @@
 import React, { useRef, useState, useMemo, useCallback, useReducer } from 'react';
 import UserList from './UserList'
 import CreateUser from './CreateUser'
+import useInputs from './useinputs';
 
 
 function countActiveUser(users) {
@@ -10,40 +11,30 @@ function countActiveUser(users) {
 
 
 const initialState = {
-  inputs: {
-    username: '',
-    email: '', 
+  users: [
+  { 
+    id:1,
+    username: 'tomato',
+    email: 'tomato@tomatoe.com',
+    active: true,
   },
-users: [{ 
-  id:1,
-  username: 'tomato',
-  email: 'tomato@tomatoe.com',
-  active: true,
-},
-{ 
-  id:2,
-  username: 'potata',
-  email: 'potatata@pottat.com',
-  active: false,
-},
-{ 
-  id:3,
-  username: '3333',
-  email: '3fdsafdsa3@tomatoe.com',
-  active: false,
+  { 
+    id:2,
+    username: 'potata',
+    email: 'potatata@pottat.com',
+    active: false,
+  },
+  { 
+    id:3,
+    username: '3333',
+    email: '3fdsafdsa3@tomatoe.com',
+    active: false,
   }
-]}
+]
+}
 
 function reducer(state, action) {
   switch (action.type){
-    case 'CHANGE_INPUT':
-      return {
-        ...state,
-        inputs: {
-          ...state.inputs,
-          [action.name]: action.value
-        }
-      };
     case 'CREATE_USER':
       return {
         inputs: initialState.inputs,
@@ -70,19 +61,16 @@ function reducer(state, action) {
 }
 
 function App() {
-  const [state, dispatch] = useReducer(reducer, initialState);
   const nextId = useRef(4);
-  const { users } =state;
-  const { username, email } = state.inputs;
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const { users } = state;
 
-  const onChange = useCallback(e => {
-    const { name,value } = e.target;
-    dispatch({
-      type:'CHANGE_INPUT',
-      name,
-      value
-    });
-  }, [])
+  const [form, onChange, reset] = useInputs({
+    username: '',
+    email: '',
+  })
+  const { username, email } = form
+
   
   const onCreate = useCallback(() => {
     dispatch({
@@ -94,7 +82,8 @@ function App() {
       }
     });
     nextId.current += 1;
-  }, [username, email]);
+    reset();
+  }, [username, email, reset]);
 
   const onToggle = useCallback(id => {
     dispatch({
@@ -113,7 +102,7 @@ function App() {
   const count = useMemo(() => countActiveUser(users), [users])
 
   return (
-  <>
+  <div>
     <CreateUser 
       username={username} 
       email={email}
@@ -126,7 +115,7 @@ function App() {
       onRemove={onRemove} 
     />
     <div>ACTIVE USER COUNT: {count}</div>
-  </>
+  </div>
   )
 };
 
