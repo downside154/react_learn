@@ -1,6 +1,12 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useMemo } from 'react';
 import UserList from './UserList'
 import CreateUser from './CreateUser'
+
+
+function countActiveUser(users) {
+  console.log("counting active users....");
+  return users.filter(user => user.active).length;
+}
 
 function App() {
 
@@ -69,6 +75,7 @@ function App() {
     ));
   };
 
+  const count = useMemo(() => countActiveUser(users), [users]);
 
   return (
   <>
@@ -79,6 +86,7 @@ function App() {
       onCreate={onCreate}
     />
     <UserList users={users} onRemove={onRemove} onToggle={onToggle}/>
+    <div>ACTIVE USER COUNT: {count}</div>
   </>
   )
 };
