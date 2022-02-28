@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 
-function User({ user, onRemove, onToggle }) {
+const User = React.memo(function User({ user, onRemove, onToggle }) {
     
     const { username, email, id, active} = user;
 
@@ -27,7 +27,7 @@ function User({ user, onRemove, onToggle }) {
             <button onClick={() => onRemove(id)}>REMOVE</button>
         </div>
     )
-}
+})
 
 
 function UserList({ users, onRemove, onToggle }){
@@ -50,4 +50,4 @@ function UserList({ users, onRemove, onToggle }){
         </div>
     )
 }
-export default UserList
+export default React.memo(UserList, (prevProps, nextProps) => nextProps.user === prevProps.user );
