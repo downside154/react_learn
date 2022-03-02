@@ -122,19 +122,28 @@ export default App;
 // 3. class properties grammar using Babel : 
 
 
-state = {
-  counter: 0,
-  fixed: 1,
-}
+// state = {
+//   counter: 0,
+//   fixed: 1,
+// }
 
-handleIncrease= () => {
-  this.state(state => ({
-    counter: state.counter + 1
-  }));
+// handleIncrease= () => {
+//   this.setState(state => ({
+//     counter: state.counter + 1
+//   }));
+//   this.setState(state => ({
+//     counter: state.counter + 1
+//   }));
+// } //decreases by 2... however:
 
-}
-
-
+// handleDecrease= () => {
+//   this.setState({
+//     counter: state.counter - 1
+//   });
+//   this.setState({
+//     counter: state.counter - 1
+//   });
+// } //decreases by -1 because setState is not a property that automatically changes value but simply sends a request to reassign the value we state, thus does not work dynamically as react renders asynchroniously
 
 
 
