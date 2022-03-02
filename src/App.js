@@ -90,7 +90,7 @@ function App() {
   const count = useMemo(() => countActiveUser(users), [users])
 
   return (
-  <div>
+  <UserDispatch.Provider value={dispatch}>
     <CreateUser 
       username={username} 
       email={email}
@@ -102,7 +102,7 @@ function App() {
 
     />
     <div>ACTIVE USER COUNT: {count}</div>
-  </div>
+  </UserDispatch.Provider>
   )
 };
 
