@@ -107,3 +107,34 @@ function App() {
 };
 
 export default App;
+
+
+
+// use of immer library to mutate immutable objects 
+// and respect react's rule of immutability
+
+
+// React used to use class based componenets because it lacked hooks before, 
+// nowadays functional programming is much more recommended
+
+// 1. when class functions are assigned to an event, "this" becomes disconnected so use the constructor to bind this to whatever you wanted it to point
+// 2. custom method using arrow functions. create a constructor with reference to this pointing to an object (not literals).... change everything to dynamic (technically class properties Babel too)
+// 3. class properties grammar using Babel : 
+
+
+state = {
+  counter: 0,
+  fixed: 1,
+}
+
+handleIncrease= () => {
+  this.state(state => ({
+    counter: state.counter + 1
+  }));
+
+}
+
+
+
+
+
